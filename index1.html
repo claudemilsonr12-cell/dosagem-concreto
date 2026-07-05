@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sistema de Correção de Umidade v22.0</title>
+
+    <meta name="theme-color" content="#1e3a8a">
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="icon" href="assets/icon-192.png">
+
+
+</head>
+
+<body>
+
+
+    <header class="topo">
+
+        <div class="logo-area">
+
+            <div class="logo-icon">
+                🏗️
+            </div>
+
+            <div>
+                <h1>Sistema de Correção de Umidade</h1>
+                <p>Controle de Dosagem e Produção de Concreto</p>
+            </div>
+
+        </div>
+
+    </header>
+
+    <main class="container">
+
+        <section class="dashboard">
+
+            <div class="card">
+                <h3>Materiais</h3>
+                <span id="totalMateriais">0</span>
+            </div>
+
+            <div class="card">
+                <h3>Volume</h3>
+                <span id="dashboardVolume">1 m³</span>
+            </div>
+
+            <div class="card">
+                <h3>Água Corrigida</h3>
+                <span id="dashboardAgua">0 kg</span>
+            </div>
+
+            <div class="card">
+                <h3>Total Produção</h3>
+                <span id="dashboardTotal">0 kg</span>
+            </div>
+
+        </section>
+
+        <section class="cabecalho">
+
+            <div class="campo">
+                <label>Traço</label>
+                <input type="text" id="dosagem">
+            </div>
+
+            <div class="campo">
+                <label>Resistência</label>
+                <input type="text" id="resistencia">
+            </div>
+
+            <div class="campo">
+                <label>Data</label>
+                <input type="date" id="data">
+            </div>
+
+            <div class="campo">
+                <label>Volume (m³)</label>
+                <input type="number" id="volume" value="1" min="0.1" step="0.1">
+            </div>
+
+        </section>
+
+        <section class="tracos">
+
+            <div class="campo">
+                <label>Traço Salvo</label>
+
+                <select id="listaTracos" onchange="carregarTraco()">
+                    <option value="">
+                        Selecione um traço
+                    </option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label>Nome do Traço</label>
+                <input type="text" id="nomeTraco">
+            </div>
+
+            <div class="campo pesquisa">
+                <label>Pesquisar</label>
+                <input type="text" id="pesquisaTraco" placeholder="Pesquisar traço">
+            </div>
+
+        </section>
+
+        <section class="tabela-container">
+
+            <table id="tabelaMateriais">
+
+                <thead>
+
+                    <tr>
+                        <th>Material</th>
+                        <th>Massa S.S.S (kg)</th>
+                        <th>Umidade (%)</th>
+                        <th>Absorção (%)</th>
+                        <th>Massa Corrigida</th>
+                        <th>Ação</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <section class="botoes">
+
+            <button class="btn btn-success" onclick="adicionarLinha()">
+                ➕ Adicionar Material
+            </button>
+
+            <button class="btn btn-primary" onclick="calcular()">
+                🧮 Calcular
+            </button>
+
+            <button class="btn btn-primary" onclick="salvarTraco()">
+                💾 Salvar Traço
+            </button>
+
+            <button class="btn btn-warning" onclick="duplicarTraco()">
+                📄 Duplicar
+            </button>
+
+            <button class="btn btn-danger" onclick="excluirTraco()">
+                🗑 Excluir
+            </button>
+
+            <button class="btn btn-dark" onclick="exportarPDF()">
+                📑 PDF
+            </button>
+
+            <button class="btn btn-dark" onclick="exportarExcel()">
+                📊 Excel
+            </button>
+
+            <button class="btn btn-dark" onclick="fazerBackup()">
+                ☁ Backup
+            </button>
+
+            <button class="btn btn-dark" onclick="window.print()">
+                🖨 Imprimir
+            </button>
+
+        </section>
+
+        <section id="resultado">
+
+            <div class="resultado-header">
+
+                <h2>
+                    Produção Total
+                </h2>
+
+            </div>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Material</th>
+                        <th>Total Produção (kg)</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="resultadoBody">
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+    <footer class="rodape">
+
+        <p>
+            Sistema de Correção de Umidade v22.0
+        </p>
+
+    </footer>
+
+    <script src="app.js"></script>
+
+
+</body>
+
+</html>
